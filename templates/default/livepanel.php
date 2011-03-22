@@ -1,7 +1,7 @@
 <?php
 include("config.php");
 //var_dump($content["NMBS"]);
-foreach($content["NMBS"] as $liveboard){
+foreach($content[$panel] as $liveboard){
      echo $liveboard["station"] . " " ."<br/>";
 }
 ?>

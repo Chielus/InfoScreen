@@ -15,7 +15,6 @@
 include_once("datamodel/APICall.class.php");
 class DataLayer {
      private $lang;
-     private $stations;
 
      public function __construct($lang){
 	  $this->lang = $lang;
@@ -30,15 +29,16 @@ class DataLayer {
      public function getStations($x,$y,$system){
 	  include("config.php");
           //check if the stationslist hasn't been loaded yet
-	  if(!isset($this->stations)){
+	  if(!isset($this->$system)){
 	       try{
-		    $this->stations = APICall::execute("stations");
+		    $this->$system = APICall::execute("stations");
 	       }catch(Exception $e){
 		    throw $e;
 	       }
 	  }
 	  $output = array();
-	  foreach($this->stations["station"] as $station){ 
+	  $stations = $this->$system;
+	  foreach($stations["station"] as $station){ 
 	       if( $this->distance($x,$station["locationX"],$y,$station["locationY"]) < $vicinity){
 		    $output[sizeof($output)] = $station;
 	       }
