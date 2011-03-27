@@ -31,7 +31,8 @@ class DataLayer {
           //check if the stationslist hasn't been loaded yet
 	  if(!isset($this->$system)){
 	       try{
-		    $this->$system = APICall::execute("stations");
+		    $args = array("system" => $system);
+		    $this->$system = APICall::execute("stations",$args);
 	       }catch(Exception $e){
 		    throw $e;
 	       }
@@ -43,9 +44,27 @@ class DataLayer {
 		    $output[sizeof($output)] = $station;
 	       }
 	  }
+	  $output = $this->removeDuplicates($output);
 	  return $output;
      }
 
+     private function removeDuplicates($nodes){
+	  $newarray = array();
+	  for($i = 0; $i < sizeof($nodes); $i++){
+	       $duplicate = false;
+	       for($j = 0; $j < $i; $j++){
+		    if($nodes[$i]["name"] == $nodes[$j]["name"]){
+			 $duplicate = true;
+			 break;//sorry father for I have sinned
+		    }
+	       }
+	       if(!$duplicate){
+		    $newarray[sizeof($newarray)] = $nodes[$i];
+	       }
+	  }
+	  return $newarray;
+     }
+     
      private function distance($x1,$x2,$y1,$y2){
 	  return (sqrt(($x2-$x1)*($x2-$x1) + ($y2-$y1)*($y2-$y1))) * 111.325;
      }
