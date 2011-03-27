@@ -42,8 +42,8 @@ class DataLayer {
 	  foreach($stations["station"] as $station){ 
 	       $dist = $this->distance($x,$station["locationX"],$y,$station["locationY"]);
 	       if( $dist < $vicinity){		    
-		    $station["distance"] = floor($dist*100)/100;
-		    $station["distance"] .= "km";
+		    $station["distance"] = floor($dist*1000);
+		    $station["distance"] .= "m";
 		    $output[sizeof($output)] = $station;
 	       }
 	  }

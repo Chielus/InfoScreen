@@ -16,23 +16,32 @@ if(!function_exists("calculateWaitingTime")){
 	       return $hours . ":" . $minutes;
 	  }else{
 		if($minutes == "0"){
-			return "( departing )";
+			return "(departing)";
 		}else{
 			return $minutes . "m";
 		}  
 	}
      }
+     function formatDelay($time){
+	  if($time != 0)
+	  return "+".formatDuration($duration);
+	  return "&nbsp;";
+     }
+     
 }
 
 foreach($content[$panel] as $liveboard){
-     if(isset($liveboard["station"])){
-	  echo "<h2>" . $liveboard["station"] . " " . $liveboard["stationinfo"]["distance"] . "</h2>";
+     if(isset($liveboard["station"]) && sizeof($liveboard["departures"]["departure"]) > 0){
+	  echo "<h3><div class=\"subject\">" . $liveboard["station"] . "</div> <div class=\"distance\">" . $liveboard["stationinfo"]["distance"] . "</div></h3>";
 	  echo "<ul>";
+	  $i = 0;
 	  foreach($liveboard["departures"]["departure"] as $dep){
 	       if(!is_null(calculateWaitingTime($dep["time"]))){
 		    $dur = calculateWaitingTime($dep["time"]);
-		    echo "<li>". $dur . " " . $dep["station"] . "</li>";
-	       }    
+//li class: item0/item1 - div classes: eta, delay, station
+		    echo "<li class=\"item". $i%2 ."\"><div class=\"eta\">". $dur . "</div> <div class=\"delay\">". formatDelay($dep["delay"]) . "</div> <div class=\"station\">" . $dep["station"] . "</div></li>";
+	       }
+	       $i++;
 	  }
 	  echo "</ul>";
      }
