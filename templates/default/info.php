@@ -6,6 +6,10 @@ include("config.php");
 <head>
 <title>iRail.be</title>
 <link rel="stylesheet" type="text/css" href="/templates/default/css/main.css"/>
+
+<!-- refresh tag for now -->
+<meta http-equiv="refresh" content="60" >
+
 </head>
 <body onload="javascript:setTimeout(\"location.reload(true);\",<?=$timeout ?>);">
 <div class="headpanel"><? include("templates/default/headpanel.php"); ?></div>

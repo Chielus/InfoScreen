@@ -2,4 +2,4 @@
 include("config.php");
 ?>
 
-<h1>My Awesome Company</h1>
+<h1>Flatturtle</h1>
