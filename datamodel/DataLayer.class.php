@@ -31,7 +31,7 @@ class DataLayer {
           //check if the stationslist hasn't been loaded yet
 	  if(!isset($this->$system)){
 	       try{
-		    $args = array("system" => $system);
+		    $args = array("system" => $system, "lang" => "NL");
 		    $this->$system = APICall::execute("stations",$args);
 	       }catch(Exception $e){
 		    throw $e;
@@ -40,7 +40,10 @@ class DataLayer {
 	  $output = array();
 	  $stations = $this->$system;
 	  foreach($stations["station"] as $station){ 
-	       if( $this->distance($x,$station["locationX"],$y,$station["locationY"]) < $vicinity){
+	       $dist = $this->distance($x,$station["locationX"],$y,$station["locationY"]);
+	       if( $dist < $vicinity){		    
+		    $station["distance"] = floor($dist*100)/100;
+		    $station["distance"] .= "km";
 		    $output[sizeof($output)] = $station;
 	       }
 	  }
@@ -62,6 +65,8 @@ class DataLayer {
 		    $newarray[sizeof($newarray)] = $nodes[$i];
 	       }
 	  }
+//	  print_r($newarray);
+	  
 	  return $newarray;
      }
      
@@ -77,18 +82,21 @@ class DataLayer {
 	  $i = 0;
 	  foreach($stations as $station){
 	       $args = array(
-		    "lang" => $this->lang,
+		    "lang" => "NL",
 		    "station" => $station["name"],
 		    "arrdep" => $direction,
 		    "system" => $system
 		    );
 	       try{
 		    $output[$i] = APICall::execute("liveboard", $args);
+		    $output[$i]["stationinfo"] = $station;
 		    $i++;
 	       }catch(Exception $e){
 		    throw $e;
 	       }
 	  }
+	  //print_r($output);
+	  
 	  return $output;
      }
 

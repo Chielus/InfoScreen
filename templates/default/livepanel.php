@@ -1,6 +1,4 @@
 <?php
-include("config.php");
-
 if(!function_exists("calculateWaitingTime")){
      function calculateWaitingTime($ut){
 	  $atm = date('U');
@@ -24,7 +22,7 @@ if(!function_exists("calculateWaitingTime")){
 
 foreach($content[$panel] as $liveboard){
      if(isset($liveboard["station"])){
-	  echo "<h2>" . $liveboard["station"] . "</h2>";
+	  echo "<h2>" . $liveboard["station"] . " " . $liveboard["stationinfo"]["distance"] . "</h2>";
 	  echo "<ul>";
 	  foreach($liveboard["departures"]["departure"] as $dep){
 	       if(!is_null(calculateWaitingTime($dep["time"]))){
