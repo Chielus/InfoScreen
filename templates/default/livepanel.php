@@ -15,8 +15,12 @@ if(!function_exists("calculateWaitingTime")){
 	  if($hours > 0){
 	       return $hours . ":" . $minutes;
 	  }else{
-	       return $minutes . "m";
-	  }
+		if($minutes == "0"){
+			return "( departing )";
+		}else{
+			return $minutes . "m";
+		}  
+	}
      }
 }
 
