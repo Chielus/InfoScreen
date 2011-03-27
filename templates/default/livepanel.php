@@ -13,9 +13,9 @@ if(!function_exists("calculateWaitingTime")){
 	  //if($minutes < 10) $minutes = "0" . $minutes;
 	  //if($hours < 10) $hours = "0" . $hours;
 	  if($hours > 0){
-	       return "~" . $hours . ":" . $minutes;
+	       return $hours . ":" . $minutes;
 	  }else{
-	       return "~" . $minutes . "'";
+	       return $minutes . "m";
 	  }
      }
 }
