@@ -23,7 +23,7 @@ if(!function_exists("calculateWaitingTime")){
 	}
      }
      function formatDelay($time){
-	  if($time != 0)
+	  if($time > 59)
 	  return "+".formatDuration($duration);
 	  return "&nbsp;";
      }
