@@ -71,7 +71,7 @@ class DataLayer {
      }
      
      private function distance($x1,$x2,$y1,$y2){
-	  return (sqrt(($x2-$x1)*($x2-$x1) + ($y2-$y1)*($y2-$y1))) * 111.325;
+	  return (3958*pi()*sqrt(($y2-$y1)*($y2-$y1) + cos($y2/57.29578)*cos($y1/57.29578)*($x2-$x1)*($x2-$x1))/180);
      }
      
 
