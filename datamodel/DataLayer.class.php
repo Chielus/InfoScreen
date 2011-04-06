@@ -14,8 +14,12 @@
  */
 include_once("datamodel/APICall.class.php");
 class DataLayer {
-     private $lang;
+     private $lang; //Language attribute, holds the language that will be used. {EN, NL, ...}
 
+/*
+ * Constructor, sets the $lang attribute of this class
+ * @lang = language parameter
+ */
      public function __construct($lang){
 	  $this->lang = $lang;
      }
@@ -28,7 +32,7 @@ class DataLayer {
  */
      public function getStations($x,$y,$system){
 	  include("config.php");
-          //check if the stationslist hasn't been loaded yet
+      //check if the stationslist hasn't been loaded yet and load the systems
 	  if(!isset($this->$system)){
 	       try{
 		    $args = array("system" => $system, "lang" => "NL");
@@ -39,6 +43,7 @@ class DataLayer {
 	  }
 	  $output = array();
 	  $stations = $this->$system;
+	  //Loop and check if distance is smaller then the vicinity, you only want to get stations nearby
 	  foreach($stations["station"] as $station){ 
 	       $dist = $this->distance($x,$station["locationX"],$y,$station["locationY"]);
 	       if( $dist < $vicinity){		    
@@ -51,6 +56,11 @@ class DataLayer {
 	  return $output;
      }
 
+/*
+ * function that will remove duplicate stations
+ * @nodes array of stations
+ * return newarray with no duplicates
+ */
      private function removeDuplicates($nodes){
 	  $newarray = array();
 	  for($i = 0; $i < sizeof($nodes); $i++){
@@ -64,22 +74,25 @@ class DataLayer {
 	       if(!$duplicate){
 		    $newarray[sizeof($newarray)] = $nodes[$i];
 	       }
-	  }
-//	  print_r($newarray);
-	  
+	  }  
 	  return $newarray;
      }
-     
+/*
+ * returns the distance between two coordinates (x1,y1) and (x2,y2)
+ */ 
      private function distance($x1,$x2,$y1,$y2){
 	  return (3958*pi()*sqrt(($y2-$y1)*($y2-$y1) + cos($y2/57.29578)*cos($y1/57.29578)*($x2-$x1)*($x2-$x1))/180);
      }
      
-
+/*
+ * return array with information about trains from the nearby stations.
+ */
      public function getLiveboard($x,$y, $direction, $system){
-//all stations in a radius of Xkm
+	//all stations in a radius of Xkm
 	  $stations = $this->getStations($x,$y,$system);	  
 	  $output = array();
-	  $i = 0;
+	  $i = 0; // counter, used in array
+	  //loop stations and execute the APIcall
 	  foreach($stations as $station){
 	       $args = array(
 		    "lang" => "NL",
@@ -94,9 +107,7 @@ class DataLayer {
 	       }catch(Exception $e){
 		    throw $e;
 	       }
-	  }
-	  //print_r($output);
-	  
+	  }	  
 	  return $output;
      }
 

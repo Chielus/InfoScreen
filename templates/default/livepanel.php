@@ -1,5 +1,9 @@
 <?php
+//Check if a function exists
 if(!function_exists("calculateWaitingTime")){
+/*
+ * Function to calculate the waiting time
+ */
      function calculateWaitingTime($ut){
 	  $atm = date('U');
 	  if($ut-$atm >0)
@@ -7,6 +11,9 @@ if(!function_exists("calculateWaitingTime")){
 	  else return NULL;
      }
 
+/*
+ * Function to show the time left until departure, if 0 it will show "departure"
+ */
      function formatDuration($time){
 	  $minutes = ($time / 60) % 60;
 	  $hours = floor($time / 3600);
@@ -22,6 +29,9 @@ if(!function_exists("calculateWaitingTime")){
 		}  
 	}
      }
+/*
+ * Function to show the Delay if there is one
+ */
      function formatDelay($time){
 	  if($time > 59){
 	  return "+".formatDuration($time);
@@ -32,6 +42,9 @@ if(!function_exists("calculateWaitingTime")){
      
 }
 
+/*
+ * loop each panel and show the trains.
+ */
 foreach($content[$panel] as $liveboard){
      if(isset($liveboard["station"]) && sizeof($liveboard["departures"]["departure"]) > 0){
 	  echo "<h3><div class=\"subject\">" . $liveboard["station"] . "</div> <div class=\"distance\">" . $liveboard["stationinfo"]["distance"] . "</div></h3>";

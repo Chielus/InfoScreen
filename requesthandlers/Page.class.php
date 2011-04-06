@@ -15,7 +15,7 @@ set_error_handler("errorhandler");
 abstract class Page {
 
      //CONFIGURATION OF THIS CLASS
-     protected $AVAILABLE_TEMPLATES = array("iRail");
+     protected $AVAILABLE_TEMPLATES = array("default"); 
      protected $AVAILABLE_LANGUAGES = array("EN", "NL", "FR", "DE");
      private $template;
      private $detectLanguage = true;
@@ -31,9 +31,14 @@ abstract class Page {
       */
      protected abstract function loadContent();
 
+/*
+ * This function will build our page
+ * @pageName Name to our file.
+ */ 
      public function buildPage($pageName) {
 	  include("config.php");
 	  $this->template = $template;
+	  //If true we will try to find the language 
 	  if ($this->detectLanguage) {
 	       $this->detectLanguage();
 	  }
@@ -53,11 +58,18 @@ abstract class Page {
 	       $this->buildError($this->getLang(), $pageName, $e);
 	  }
      }
-
+/*
+ * Function to change Detectlanguage, Boolean
+ */
      public function setDetectLanguage($bool) {
 	  $this->detectLanguage = $bool;
      }
 
+/*
+ * Function to detect language
+ * Will check for cookie first else if in the "HTTP_ACCEPT_LANGUAGE" else default "EN"
+ * Will also check GET to check for a language.
+ */
      private function detectLanguage() {
 	  if (isset($_COOKIE["language"])) {
 	       $this->setLanguage($_COOKIE["language"]);
@@ -72,6 +84,9 @@ abstract class Page {
 	  }
      }
 
+/*
+ * Load Global variables
+ */
      private function loadGlobals() {
 	  $globals =array();
 //	 $globals["GoogleAnalytics"] = file_get_contents("includes/googleAnalytics.php");
@@ -80,6 +95,11 @@ abstract class Page {
 	  return $globals;
      }
 
+/*
+ * Function to change template attribute
+ * Will check if template exists
+ * @template contains template string name
+ */
      public function setTemplate($template) {
 	  if (in_array($template, $this->AVAILABLE_TEMPLATES)) {
 	       $this->template = $template;
@@ -87,7 +107,11 @@ abstract class Page {
 	       throw new Exception("template doesn't exist");
 	  }
      }
-
+/*
+ * Function to change the language attribute
+ * Will check if language is available
+ * @lang contains language string
+ */
      public function setLanguage($lang) {
 	  if (in_array($lang, $this->AVAILABLE_LANGUAGES)) {
 	       $this->lang = $lang;
@@ -96,24 +120,37 @@ abstract class Page {
 	  }
      }
 
+/*
+ * Function to load language, will include the language file
+ * return Array of the language
+ */
      private function loadI18n() {
 	  if(in_array($this->lang,$this->AVAILABLE_LANGUAGES)){
 	       include("i18n/". strtoupper($this->lang) . ".php");
 	  }
 	  return $i18n;
      }
-
+/*
+ * return the language string
+ */
      public function getLang() {
 	  return $this->lang;
      }
 
+/*
+ * Function that will build the errors
+ * 
+ */
      public function buildError($lang, $pageName, $e){
 	  if($this->doErrorhandling)
 	       errorhandler(500,$e->getMessage());
      }
   }
 
-//error handling function
+/*
+ * Function that handles the errors
+ * will include custom error page with the errors within the contect array
+ */
 function errorhandler($errno,$errstr){
      logerror($errno,$errstr);
      $content = array("message"=> $errstr);

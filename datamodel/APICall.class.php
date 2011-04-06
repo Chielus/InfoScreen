@@ -13,16 +13,20 @@
  * @package datamodel
  */
 class APICall {
-
+/*
+ * Returns an array called from the API
+ */
      public static function execute($functionname, $argumentarray = array()){
           //preconditions: we need a good functionname (probably one of the four defined in the iRail api, but let's not be racist). If we urlencode the functionname we're sure that no hacking will be possible (such as entering http://www.ihazhackedyourwebsitescript as a functionname)
 	  $functionname= urlencode($functionname);
           //url encode the argumentsarray so we have a good call to the API
 	  $arguments = "";
+	  //Set the GETs, &KEY1=VAL1&KEY2=VAL2...
 	  foreach($argumentarray as $key => $val){
 	       $arguments .= "&" . urlencode($key) . "=" . urlencode($val);
 	  }
 	  include("config.php");
+	  //Create final url to CALLAPI
 	  $url = $APIurl . $functionname . "/?format=json" . $arguments;
 	  //Now let's fire up the call to the api and return the result
 	  try{
@@ -37,6 +41,11 @@ class APICall {
 	  }
      }
 
+/*
+ * http_post_data: Returns the HTTP response(s)
+ * http_parse_message: Returns a hierarchical object structure of the parsed messages. 
+ * Returns the body of a HTTP request
+ */
      private static function httpcall($url){
 	  //maybe we should add the method to the config. Some servers have curl, some have this method:
 	  include("config.php");
