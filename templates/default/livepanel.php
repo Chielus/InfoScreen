@@ -10,7 +10,6 @@ if(!function_exists("calculateWaitingTime")){
 	  return formatDuration($ut - $atm);
 	  else return NULL;
      }
-
 /*
  * Function to show the time left until departure, if 0 it will show "departure"
  */
@@ -47,6 +46,7 @@ if(!function_exists("calculateWaitingTime")){
  */
 foreach($content[$panel] as $liveboard){
      if(isset($liveboard["station"]) && sizeof($liveboard["departures"]["departure"]) > 0){
+	  echo "<div class=\"stationWrapper\" id=\"stationWrapper\">";
 	  echo "<h3><div class=\"subject\">" . $liveboard["station"] . "</div> <div class=\"distance\">" . $liveboard["stationinfo"]["distance"] . "</div></h3>";
 	  echo "<ul>";
 	  $i = 0;
@@ -59,6 +59,8 @@ foreach($content[$panel] as $liveboard){
 	       $i++;
 	  }
 	  echo "</ul>";
+	  echo "</div>";
      }
+
 }
 ?>

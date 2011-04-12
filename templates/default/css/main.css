@@ -33,11 +33,13 @@ li{
 li.item0{
     background-color: #DDD;
     overflow:hidden;
+	height: 20px;
 }
 
 li.item1{
     background-color: #AAA;
     overflow:hidden;
+	height: 20px;
 }
 div.eta{
     text-align : right;
@@ -79,6 +81,12 @@ h3{
     width: 100%;
     background-color: #888;
     padding: 0;
+}
+
+.stationWrapper{
+    visibility : hidden ;
+	position: absolute;
+	width:46.3%
 }
 
 div.footer{
