@@ -1,7 +1,8 @@
 <?php
-require_once('simpletest/autorun.php');
-require_once('../datamodel/DataLayer.class.php');
-require_once('../datamodel/APICall.class.php');
+ini_set("include_path", "../");
+include_once('tests/simpletest/autoruan.php');
+include_once('model/DataLayer.class.php');
+include_once('model/APICall.class.php');
 
 class FileTestCase extends UnitTestCase {
 	function FileTestCase() {
@@ -13,7 +14,7 @@ class FileTestCase extends UnitTestCase {
 
 	//This will happen before test
 	function setUp() {
-
+ 
 	}
 	//This will happen after test
 	function tearDown() {

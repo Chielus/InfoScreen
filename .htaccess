@@ -8,7 +8,7 @@ Options -Indexes
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
-RewriteRule ^$ requesthandlers/controller.php?page=info [QSA,NC,L]
-RewriteRule ^(\d*\.?\d*)/(\d*\.?\d*)/$ requesthandlers/controller.php?page=info&x=$2&y=$1 [QSA,NC,L]
+RewriteRule ^$ controllers/controller.php?page=info [QSA,NC,L]
+RewriteRule ^(\d*\.?\d*)/(\d*\.?\d*)/$ controllers/pagehandler.php?page=info&x=$2&y=$1 [QSA,NC,L]
 </IfModule>
 

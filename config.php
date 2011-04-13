@@ -9,7 +9,7 @@ $vicinity = 1;	//stations closer than 1 km
 
 $systems = array("NMBS", "MIVB");
 
-$timeout = 120000;
+$timeout = 60000;
 //For the settimeout interval
 
 //	-------------------------
