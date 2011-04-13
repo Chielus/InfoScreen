@@ -9,11 +9,11 @@
 //set the include path to the root
 ini_set('include_path', '../');
 //Step 0: Include all necessary files
-include_once("controllers/HttpRequest.class.php");
-
+include_once("controllers/HttpCall.class.php");
+include_once("model/DataLayer.class.php");
 //Step 1: Implement the abstract Page class
 //This class will automatically include necessary stuff such like error handling
-class PageHandler extends HttpRequest{
+class PageHandler extends HttpCall{
      protected $AVAILABLE_TEMPLATES = array("default");
      private $template = "default";
    /**
@@ -22,12 +22,13 @@ class PageHandler extends HttpRequest{
     */
      protected function loadContent(){
 	  //Step 2: Get the get vars, change them to the right format & boom
-	//...
+	  $data= new DataLayer($this->getLang());
+	  return $data->getStations();
      }
 	
-protected function getIncludeFile($pageName){
-return "templates/" . $this->template . "/" . $pageName . ".php";
-}
+     protected function getIncludeFile($pageName){
+	  return "templates/" . $this->template . "/" . $pageName . ".php";
+     }
 /*
  * Function to change template attribute
  * Will check if template exists

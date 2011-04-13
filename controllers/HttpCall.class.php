@@ -12,7 +12,7 @@
    * @license aGPL
    */
 set_error_handler("errorhandler");
-abstract class HttpRequest {
+abstract class HttpCall {
 
      //CONFIGURATION OF THIS CLASS
      protected $AVAILABLE_LANGUAGES = array("EN", "NL", "FR", "DE");
@@ -43,7 +43,7 @@ abstract class HttpRequest {
 	       $content = $this->loadContent();
 	       $globals = $this->loadGlobals();
 	       $i18n = $this->loadI18n();
-	       $file = $this->getIncludeFile();
+	       $file = $this->getIncludeFile($pageName);
 	       //../ added because that's the iniset's includepath
 	       if(!file_exists("../" . $file)){
 	           throw new Exception("Wrong pagename given");
@@ -55,7 +55,7 @@ abstract class HttpRequest {
 	       $this->buildError($this->getLang(), $pageName, $e);
 	  }
      }
-protected function getIncludeFile();
+     protected abstract function getIncludeFile($pageName);
 /*
  * Function to change Detectlanguage, Boolean
  */

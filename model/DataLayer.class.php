@@ -23,6 +23,12 @@ class DataLayer {
      public function __construct($lang){
 	  $this->lang = $lang;
      }
+
+     public function getStations(){
+	  $toreturn = array("NMBS" => $this->getClosestStations(50.86,4.36,"NMBS"), "MIVB" => $this->getClosestStations(50.86,4.36,"MIVB"));
+	  return $toreturn;
+     }
+
 /**
  * Returns a list of all stations according to the lang variable and what the API returns. Normally it will have these variables:
  * array[i] -> name
@@ -30,7 +36,7 @@ class DataLayer {
             -> locationY
             -> standardname
  */
-     public function getStations($x,$y,$system){
+     private function getClosestStations($y,$x,$system){
 	  include("config.php");
       //check if the stationslist hasn't been loaded yet and load the systems
 	  if(!isset($this->$system)){
@@ -46,7 +52,7 @@ class DataLayer {
 	  //Loop and check if distance is smaller then the vicinity, you only want to get stations nearby
 	  foreach($stations["station"] as $station){ 
 	       $dist = $this->distance($x,$station["locationX"],$y,$station["locationY"]);
-	       if( $dist < $vicinity){		    
+	       if(!is_nan($dist) && $dist < $vicinity){
 		    $station["distance"] = floor($dist*1000);
 		    $station["distance"] .= "m";
 		    $output[sizeof($output)] = $station;
@@ -77,6 +83,14 @@ class DataLayer {
 	  }  
 	  return $newarray;
      }
-     
+
+     private function distance($x1,$x2,$y1,$y2){
+	  $R = 6371; // km
+	  $dY = deg2rad($y2-$y1);
+	  $dX = deg2rad($x2-$x1);
+	  $a = sin($dY/2) * sin($dY/2) + cos(deg2rad($y1)) * cos(deg2rad($y2)) *sin($dX/2) * sin($dY/2);
+	  $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+	  return $R * $c;
+     }
 }
 ?>
