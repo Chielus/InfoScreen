@@ -14,8 +14,8 @@ include_once("model/DataLayer.class.php");
 //Step 1: Implement the abstract Page class
 //This class will automatically include necessary stuff such like error handling
 class PageHandler extends HttpCall{
-     protected $AVAILABLE_TEMPLATES = array("default");
-     private $template = "default";
+     protected $AVAILABLE_TEMPLATES = array("default", "FlatTurtle");
+     private $template = "FlatTurtle";
    /**
     * Function is used for API Requests
     * @return array will return an associative array of page specific variables.

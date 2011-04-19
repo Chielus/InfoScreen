@@ -25,7 +25,8 @@ class DataLayer {
      }
 
      public function getStations(){
-	  $toreturn = array("NMBS" => $this->getClosestStations(50.86,4.36,"NMBS"), "MIVB" => $this->getClosestStations(50.86,4.36,"MIVB"));
+	  include("config.php");
+	  $toreturn = array("MIVB" => $mivbarray, "NMBS" => $nmbsarray);
 	  return $toreturn;
      }
 
@@ -53,8 +54,7 @@ class DataLayer {
 	  foreach($stations["station"] as $station){ 
 	       $dist = $this->distance($x,$station["locationX"],$y,$station["locationY"]);
 	       if(!is_nan($dist) && $dist < $vicinity){
-		    $station["distance"] = floor($dist*1000);
-		    $station["distance"] .= "m";
+		    $station["distance"] = floor($dist*1000);//in meters
 		    $output[sizeof($output)] = $station;
 	       }
 	  }
