@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	
+	<meta http-equiv="refresh" content="3600"><!--Refresh the page each hour to update the source code-->
 	<title></title>
 	<meta name="description" content="">
 	<meta name="author" content="">
