@@ -16,6 +16,7 @@ include_once("model/DataLayer.class.php");
 class PageHandler extends HttpCall{
      protected $AVAILABLE_TEMPLATES = array("default", "FlatTurtle", "iRail");
      private $template = "FlatTurtle";
+private $detectTemplate = false;
    /**
     * Function is used for API Requests
     * @return array will return an associative array of page specific variables.
@@ -27,6 +28,9 @@ class PageHandler extends HttpCall{
      }
 	
      protected function getIncludeFile($pageName){
+	if($this->detectTemplate){
+		$this->detectTemplate();
+	}
 	  return "templates/" . $this->template . "/" . $pageName . ".php";
      }
 /*
@@ -41,11 +45,32 @@ class PageHandler extends HttpCall{
                throw new Exception("template doesn't exist");
           }
      }
+/*
+ * Function to change Detectlanguage, Boolean
+ */
+     public function setDetectTemplate($bool) {
+          $this->detectTemplate = $bool;
+     }
 
+/*
+ * Function to detect language
+ * Will check for cookie first else if in the "HTTP_ACCEPT_LANGUAGE" else default "EN"
+ * Will also check GET to check for a language.
+ */
+     private function detectTemplate() {
+          if (isset($_COOKIE["template"])) {
+               $this->setTemplate($_COOKIE["template"]);
+          }
+          if (isset($_GET["template"])) {
+               $this->setTemplate($_GET["template"]);
+               setcookie("template", $_GET["template"], time() + 60 * 60 * 24 * 360);
+          }
+     }
 }
 
 //Step 3: load the process
 $instance = new PageHandler();
+$instance->setDetectTemplate(true);
 $instance->buildPage($_GET["page"]);
 
 ?>
