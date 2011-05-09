@@ -134,7 +134,7 @@
 			addBehaviours();
 			
 			$.each(config.liveboards[system], function(i, station) {
-				liveBoards.push(new LiveBoard(liveBoardContainer.templateAppend("EmptyDiv"), system, station, config).stop().hide());
+					liveBoards.push(new LiveBoard(liveBoardContainer.templateAppend("EmptyDiv"), system, station, config).stop().hide());
 			});
 			
 			liveBoards[currentLiveBoardIndex] && liveBoards[currentLiveBoardIndex].start().show();
@@ -221,7 +221,7 @@
 					entry.destroy(true);
 				});
 				for(var i=0; i<data.entries.length&&i<config.rowsToShow; i++) {
-					rows.push(new LiveBoardRow(rowContainer.templateAppend("EmptyTr"), system, data.entries[i]));
+						rows.push(new LiveBoardRow(rowContainer.templateAppend("EmptyTr"), system, data.entries[i]));
 				}
 				refreshCallback && refreshCallback();
 				refreshCallback = null;
@@ -302,7 +302,10 @@
 			// if( Math.floor(Math.random()*4)==0){
 			// 	this.cancelled = true;
 			// }
-			
+							
+				if($(".liveboards").find("tbody").children().size() == 1){
+					
+				}
 			initializeHtml();
 			addBehaviours();			
 		};

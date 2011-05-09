@@ -75,6 +75,7 @@
 				ticker = true;
 				return (hours<10?'0':'')+hours+"<span style='visibility:hidden;'>:</span>"+(minutes<10?'0':'')+minutes;
 			}
+			
 		};
 		
 		var initialize = function() {
@@ -133,7 +134,7 @@
 			addBehaviours();
 			
 			$.each(config.liveboards[system], function(i, station) {
-				liveBoards.push(new LiveBoard(liveBoardContainer.templateAppend("EmptyDiv"), system, station, config).stop().hide());
+					liveBoards.push(new LiveBoard(liveBoardContainer.templateAppend("EmptyDiv"), system, station, config).stop().hide());
 			});
 			
 			liveBoards[currentLiveBoardIndex] && liveBoards[currentLiveBoardIndex].start().show();

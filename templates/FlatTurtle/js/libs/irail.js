@@ -23,8 +23,8 @@
 
 $.ajaxSetup({beforeSend:function(req){req.setRequestHeader("User-Agent","jQuery Useragent script")}});
 
-var irail = function __irail_namespace($) {
 
+var irail = function __irail_namespace($) {
     if ( ! typeof $ == "function" ) { throw new Error('jQuery not loaded, check inclusion order'); }
 
     var _cache = { stations: [], connections: {}, liveboards: {}, vehicles: {}, timestamps: {}, default_lang: null };
@@ -115,7 +115,8 @@ var irail = function __irail_namespace($) {
             dataType: 'jsonp',
             success: function(json) { 
 
-                _cache.timestamps.last_server_response = new Date().getTime(); 
+                _cache.timestamps.last_server_response = new Date().getTime();
+				
 
 								switch (direction) {
 									case "DEP" :

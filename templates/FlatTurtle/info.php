@@ -13,7 +13,6 @@
 	<link rel="shortcut icon" href="/templates/FlatTurtle/favicon.ico">
 	<link rel="apple-touch-icon" href="/templates/FlatTurtle/apple-touch-icon.png">
 	<link rel="stylesheet" href="/templates/FlatTurtle/css/style.css?v=2">
-
 </head>
 <body>
 	<div id="container">
@@ -162,10 +161,12 @@
 			     foreach($content["MIVB"] as $s){
 			echo '	 
 				{
+					
 					"name" : "'. $s["name"].'",
 					"distanceMeters" : "'.$s["distance"].'",
 					"distanceWalking" : "'. $s["walking"].'"
 				},';
+				 
 			     }
 ?>			]
 		}

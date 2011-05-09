@@ -10,9 +10,9 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="shortcut icon" href="/templates/FlatTurtle/favicon.ico">
-	<link rel="apple-touch-icon" href="/templates/FlatTurtle/apple-touch-icon.png">
-	<link rel="stylesheet" href="/templates/FlatTurtle/css/style.css?v=2">
+	<link rel="shortcut icon" href="/templates/iRail/favicon.ico">
+	<link rel="apple-touch-icon" href="/templates/iRail/apple-touch-icon.png">
+	<link rel="stylesheet" href="/templates/iRail/css/style.css?v=2">
 
 </head>
 <body>
@@ -30,7 +30,7 @@
 			<header>
 				<div class="Clock"></div>
 				<% if (this.companyLogo) { %>
-					<img src="<%= this.companyLogo %>">
+					<img style="margin: 5px;" src="<%= this.companyLogo %>">
 				<% } %>
 			</header>
 			<div id="main" role="main">
@@ -133,9 +133,9 @@
 		
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script>!window.jQuery && document.write(unescape('%3Cscript src="/templates/FlatTurtle/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
-	<script src="/templates/FlatTurtle/js/plugins.js"></script>
-	<script src="/templates/FlatTurtle/js/libs/jqote2.js"></script>
-	<script src="/templates/FlatTurtle/js/libs/irail.js"></script>
+	<script src="/templates/iRail/js/plugins.js"></script>
+	<script src="/templates/iRail/js/libs/jqote2.js"></script>
+	<script src="/templates/iRail/js/libs/irail.js"></script>
 	<script>
 	window.LiveBoardConfig = {
 	"messageOfTheDay" : "",
@@ -143,7 +143,7 @@
 		"rowsToShow" : 10,
 		"refreshLiveboardsInterval" : 60,
 		"cycleLiveboardsInterval" : 10,
-		"companyLogo" : "/templates/FlatTurtle/img/logo.png",
+		"companyLogo" : "/templates/iRail/img/logo.png",
 		"liveboards" : {
 			"nmbs" : [
 			     <?php
@@ -162,15 +162,17 @@
 			     foreach($content["MIVB"] as $s){
 			echo '	 
 				{
+					
 					"name" : "'. $s["name"].'",
 					"distanceMeters" : "'.$s["distance"].'",
 					"distanceWalking" : "'. $s["walking"].'"
 				},';
+				 
 			     }
 ?>			]
 		}
 	};
 	</script>
-	<script src="/templates/FlatTurtle/js/app.js"></script>
+	<script src="/templates/iRail/js/app.js"></script>
 </body>
 </html>
