@@ -1,71 +1,89 @@
 <?php
+
 /* Copyright (C) 2011 by iRail vzw/asbl 
  *
- * This will catch all requests through the hidden url-rewrite service (see .htaccess). It will generate a Model and a View through the Page class.
+ * This will catch all requests through the hidden url-rewrite service (see .htaccess).
+ * It will generate a Model and a View through the Page class.
  *
  * @author Pieter Colpaert
  * @license AGPL
  */
-//set the include path to the root
+
+// Set the include path to the root
 ini_set('include_path', '../');
-//Step 0: Include all necessary files
-include_once("controllers/HttpCall.class.php");
-include_once("model/DataLayer.class.php");
-//Step 1: Implement the abstract Page class
-//This class will automatically include necessary stuff such like error handling
-class PageHandler extends HttpCall{
-     protected $AVAILABLE_TEMPLATES = array("default", "FlatTurtle", "iRail");
-     private $template = "FlatTurtle";
-private $detectTemplate = false;
-   /**
+
+// Step 0: Include all necessary files
+include_once('controllers/HttpCall.class.php');
+include_once('model/DataLayer.class.php');
+
+// Step 1: Implement the abstract Page class
+// This class will automatically include necessary stuff such like error handling
+class PageHandler extends HttpCall {
+  
+  protected $AVAILABLE_TEMPLATES = array("default", "FlatTurtle", "iRail");
+  private $template = "FlatTurtle";
+  private $detectTemplate = false;
+
+  /**
     * Function is used for API Requests
     * @return array will return an associative array of page specific variables.
     */
-     protected function loadContent(){
-	  //Step 2: Get the get vars, change them to the right format & boom
-	  $data= new DataLayer($this->getLang());
-	  return $data->getStations();
-     }
-	
-     protected function getIncludeFile($pageName){
-	if($this->detectTemplate){
-		$this->detectTemplate();
-	}
-	  return "templates/" . $this->template . "/" . $pageName . ".php";
-     }
-/*
- * Function to change template attribute
- * Will check if template exists
- * @template contains template string name
- */
-     public function setTemplate($template) {
-          if (in_array($template, $this->AVAILABLE_TEMPLATES)) {
-               $this->template = $template;
-          }else{
-               throw new Exception("template doesn't exist");
-          }
-     }
-/*
- * Function to change Detectlanguage, Boolean
- */
-     public function setDetectTemplate($bool) {
-          $this->detectTemplate = $bool;
-     }
+  protected function loadContent() {
+    include('config.php');
 
-/*
- * Function to detect language
- * Will check for cookie first else if in the "HTTP_ACCEPT_LANGUAGE" else default "EN"
- * Will also check GET to check for a language.
- */
-     private function detectTemplate() {
-          if (isset($_COOKIE["template"])) {
-               $this->setTemplate($_COOKIE["template"]);
-          }
-          if (isset($_GET["template"])) {
-               $this->setTemplate($_GET["template"]);
-               setcookie("template", $_GET["template"], time() + 60 * 60 * 24 * 360);
-          }
-     }
+    // Step 2: Get the get vars, change them to the right format & boom
+    $datalayer = new DataLayer($this->getLang());
+    
+    // Stations from local database
+    $stations = $datalayer->getStationsData($nmbs, $mivb, $latitude, $longitude);
+    // Stations nearby
+    //stations = $datalayer->getClosestStationsData($latitude, $longitude, $vicinity);
+
+    return $stations;
+  }
+	
+  protected function getIncludeFile($pageName) {
+    if($this->detectTemplate) {
+      $this->detectTemplate();
+    }
+
+    return "templates/" . $this->template . "/" . $pageName . ".php";
+  }
+
+  /*
+   * Function to change template attribute
+   * Will check if template exists
+   * @template contains template string name
+   */
+  public function setTemplate($template) {
+    if(in_array($template, $this->AVAILABLE_TEMPLATES)) {
+      $this->template = $template;
+    } else{
+      throw new Exception("Template doesn't exist!");
+    }
+  }
+
+  /*
+   * Function to change detectTemplate
+   */
+  public function setDetectTemplate($bool) {
+    $this->detectTemplate = $bool;
+  }
+
+  /*
+   * Function to detect language
+   * Will check for cookie first else if in the "HTTP_ACCEPT_LANGUAGE" else default "EN"
+   * Will also check GET to check for a language.
+   */
+  private function detectTemplate() {
+    if (isset($_COOKIE["template"])) {
+      $this->setTemplate($_COOKIE["template"]);
+    }
+    if (isset($_GET["template"])) {
+      $this->setTemplate($_GET["template"]);
+      setcookie("template", $_GET["template"], time() + 60 * 60 * 24 * 360);
+    }
+  }
 }
 
 //Step 3: load the process

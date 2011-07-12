@@ -1,32 +1,42 @@
 <?php
 
+ini_set('error_reporting', E_ALL);
+
 $APIurl = "http://api.iRail.be/";
 //Link to iRail API
 $iRailAgent = "InfoScreen v0.1";
-
-$template = "default";
-$vicinity = 0.2;	//stations closer than 200m
 
 $systems = array("NMBS", "MIVB");
 
 $timeout = 60;
 
-$mivbarray = array(array("name" =>"Steenbok", "distance" => 186),
-		   // array("name" =>"Plejade", "distance" => "362"),
-		   //array("name" =>"Lombaerde", "distance" => "368"),
-		   array("name" =>"Carina", "distance" => 425),
-		   array("name" =>"Paduwa", "distance" => 424));
+// DATABASE
+$id = 1; // should be a fixed value somewhere
 
-$nmbsarray = array(array("name" =>"Brussel Noord", "distance" => 3900),
-		   array("name" =>"Evere", "distance" => 3900),
-		   array("name" =>"Meiser", "distance" => 1300));
+$db = new SQLite3(ini_get('include_path') . 'customers.db');
+$row = $db->querySingle('SELECT * FROM infoscreen WHERE id = ' . $id, true);
 
-//3000m/hour = 50m/minute
-for($i = 0; $i < sizeof($mivbarray); $i++){
-     $mivbarray[$i]["walking"] = round($mivbarray[$i]["distance"]/50);
+$template = $row['template'];
+$vicinity = $row['vicinity'];
+$companylogo = $row['companylogo'];
+$motd = $row['motd'];
+
+$refreshinterval = $row['refreshinterval'];
+$cycleinterval = $row['cycleinterval'];
+
+$rowstoshow = $row['rowstoshow'];
+
+$nmbs = explode(';', $row['nmbs']);
+for ($i = 0; $i < sizeof($nmbs); $i++) {
+  $nmbs[$i] = str_replace('"', '', $nmbs[$i]);
 }
-for($i = 0; $i < sizeof($nmbsarray); $i++){
-     $nmbsarray[$i]["walking"] = round($nmbsarray[$i]["distance"]/50);
+
+$mivb = explode(';', $row['mivb']);
+for ($i = 0; $i < sizeof($mivb); $i++) {
+  $mivb[$i] = str_replace('"', '', $mivb[$i]);
 }
+
+$latitude = $row['lat'];
+$longitude = $row['long'];
 
 ?>

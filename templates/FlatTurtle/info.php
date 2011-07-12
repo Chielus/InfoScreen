@@ -137,40 +137,36 @@
 	<script src="/templates/FlatTurtle/js/libs/irail.js"></script>
 	<script>
 	window.LiveBoardConfig = {
-	"messageOfTheDay" : "",
-      //	"messageOfTheDay" : "Message of the day is this long sentence. So please read it. <br />Notice that there is still some of the timetable visible below.",
-		"rowsToShow" : 10,
-		"refreshLiveboardsInterval" : 60,
-		"cycleLiveboardsInterval" : 10,
-		"companyLogo" : "/templates/FlatTurtle/img/logo.png",
+                "messageOfTheDay" : "<?php echo $globals['messageOfTheDay']; ?>",
+		"rowsToShow" : <?php echo $globals['rowsToShow']; ?>,
+		"refreshLiveboardsInterval" : <?php echo $globals['refreshInterval']; ?>,
+		"cycleLiveboardsInterval" : <?php echo $globals['cycleInterval']; ?>,
+		"companyLogo" : "<?php echo $globals['companyLogo']; ?>",
 		"liveboards" : {
 			"nmbs" : [
 			     <?php
-			     foreach($content["NMBS"] as $s){
-			echo '	  
-				{
+				  foreach($content["NMBS"] as $s) {
+				    echo '{
 					"name" : "'. $s["name"].'",
 					"distanceMeters" : "'.$s["distance"].'",
 					"distanceWalking" : "'. $s["walking"].'"
-				},';
-			     }
-?>
+				           },';
+				  }
+			     ?>
 			],
 			"mivb" : [
 			     <?php
-			     foreach($content["MIVB"] as $s){
-			echo '	 
-				{
-					
+				  foreach($content["MIVB"] as $s) {
+				    echo '{
 					"name" : "'. $s["name"].'",
 					"distanceMeters" : "'.$s["distance"].'",
 					"distanceWalking" : "'. $s["walking"].'"
-				},';
-				 
-			     }
-?>			]
+				          },';				 
+				  }
+			     ?>			
+		        ]
 		}
-	};
+        };
 	</script>
 	<script src="/templates/FlatTurtle/js/app.js"></script>
 </body>
