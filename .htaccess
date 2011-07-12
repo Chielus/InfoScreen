@@ -11,4 +11,3 @@ RewriteBase /
 RewriteRule ^$ controllers/pagehandler.php?page=info [QSA,NC,L]
 RewriteRule ^(\d*\.?\d*)/(\d*\.?\d*)/$ controllers/pagehandler.php?page=info&x=$2&y=$1 [QSA,NC,L]
 </IfModule>
-
