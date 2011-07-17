@@ -1,7 +1,7 @@
 
 /* ==== Scroll down to find where to put your styles :) ==== */
 
-/*  HTML5 ✰ Boilerplate  */
+/*  HTML5 Boilerplate  */
 
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -12,9 +12,9 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
-  margin: 0;
-  margin-right: 20px;
-  margin-left: 20px;
+/*  margin: 0; */
+  margin-right: 20;
+  margin-left: 20;
   padding: 0;
   border: 0;
   font-size: 100%;
