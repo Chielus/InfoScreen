@@ -3,13 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta http-equiv="refresh" content="3600"><!--Refresh the page each hour to update the source code-->
+	<meta http-equiv="refresh" content="1800"><!--Refresh the page each half hour to update the source code-->
 	<title></title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-	
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+
 	<link rel="shortcut icon" href="/templates/FlatTurtle/favicon.ico">
 	<link rel="apple-touch-icon" href="/templates/FlatTurtle/apple-touch-icon.png">
 	<link rel="stylesheet" href="/templates/FlatTurtle/css/style.css?v=2">
@@ -22,7 +22,7 @@
 
 		</footer>
 	</div>
-	
+
 	<script type="text/x-jqote-template" id="App-template">
     <![CDATA[
 		<div class="App">
