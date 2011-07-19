@@ -5,8 +5,8 @@
 <html>
   <head>
     <title>iRail.be</title>
-    <link rel="stylesheet" type="text/css" href="/templates/default/css/main.css"/>
-    <script href="/templates/default/js/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="templates/default/css/main.css"/>
+    <script href="templates/default/js/main.js"></script>
     <script>
       <?php
 	 var_dump($content);

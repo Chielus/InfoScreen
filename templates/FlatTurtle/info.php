@@ -3,16 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta http-equiv="refresh" content="300"><!--Refresh the page each half hour to update the source code-->
+	<meta http-equiv="refresh" content="3000"><!--Refresh the page each half hour to update the source code-->
 	<title></title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="shortcut icon" href="/templates/FlatTurtle/favicon.ico">
-	<link rel="apple-touch-icon" href="/templates/FlatTurtle/apple-touch-icon.png">
-	<link rel="stylesheet" href="/templates/FlatTurtle/css/style.css?v=2">
+	<link rel="shortcut icon" href="templates/FlatTurtle/favicon.ico">
+	<link rel="apple-touch-icon" href="templates/FlatTurtle/apple-touch-icon.png">
+	<link rel="stylesheet" href="templates/FlatTurtle/css/style.css?v=2">
 </head>
 <body>
 	<div id="container">
@@ -35,11 +35,11 @@
 			<div id="main" role="main">
 				<% if (this.messageOfTheDay) { %>
 					<div class="messageOfTheDay">
-						<%= this.messageOfTheDay %>
+						<h1><%= this.messageOfTheDay %></h1>
 					</div>
 				<% } %>
 				<div class="SystemPane nmbs"></div>
-				<div class="SystemPane mivb"></div>
+				<!--<div class="SystemPane mivb"></div>-->
 			</div>
 		</div>
     ]]>
@@ -131,18 +131,17 @@
 	</script>
 		
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script>!window.jQuery && document.write(unescape('%3Cscript src="/templates/FlatTurtle/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
-	<script src="/templates/FlatTurtle/js/plugins.js"></script>
-	<script src="/templates/FlatTurtle/js/libs/jqote2.js"></script>
-	<script src="/templates/FlatTurtle/js/libs/irail.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="templates/FlatTurtle/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<script src="templates/FlatTurtle/js/plugins.js"></script>
+	<script src="templates/FlatTurtle/js/libs/jqote2.js"></script>
+	<script src="templates/FlatTurtle/js/libs/irail.js"></script>
 	<script>
 	window.LiveBoardConfig = {
-	"messageOfTheDay" : "",
-      //	"messageOfTheDay" : "Message of the day is this long sentence. So please read it. <br />Notice that there is still some of the timetable visible below.",
-		"rowsToShow" : 10,
-		"refreshLiveboardsInterval" : 60,
-		"cycleLiveboardsInterval" : 10,
-		"companyLogo" : "/templates/FlatTurtle/img/logo.png",
+      	//"messageOfTheDay" : "<?php echo $content["motd"]; ?>",
+		"rowsToShow" : <?php echo $content["rowstoshow"]; ?>,
+		"refreshLiveboardsInterval" : <?php echo $content["refreshinterval"]; ?>,
+		"cycleLiveboardsInterval" : <?php echo $content["cycleinterval"]; ?>,
+		"companyLogo" : "<?php echo $content["logo"]; ?>",
 		"liveboards" : {
 			"nmbs" : [
 			     <?php
@@ -172,6 +171,6 @@
 		}
 	};
 	</script>
-	<script src="/templates/FlatTurtle/js/app.js"></script>
+	<script src="templates/FlatTurtle/js/app.js"></script>
 </body>
 </html>

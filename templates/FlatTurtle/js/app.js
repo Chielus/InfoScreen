@@ -23,7 +23,7 @@
 			
 			this.clock = new Clock(rootElement.find(".Clock"));
 			this.nmbsSystemPane = new SystemPane(rootElement.find(".SystemPane.nmbs"), "nmbs", config);
-			this.mivbSystemPane = new SystemPane(rootElement.find(".SystemPane.mivb"), "mivb", config);
+			//this.mivbSystemPane = new SystemPane(rootElement.find(".SystemPane.mivb"), "mivb", config);
 		};
 
 		var initializeHtml = function() {
@@ -39,8 +39,9 @@
 		this.destroy = function() {
 			removeBehaviours();
 
+			this.clock.destroy();
 			this.nmbsSystemPane.destroy();
-			this.mivbSystemPane.destroy();
+			//this.mivbSystemPane.destroy();
 			
 			rootElement.empty();
 		}
@@ -99,6 +100,7 @@
 			removeBehaviours();
 
 			rootElement.empty();
+			rootElement = null;
 		}
 
 		this.update = function() {

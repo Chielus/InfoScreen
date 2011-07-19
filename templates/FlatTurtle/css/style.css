@@ -104,14 +104,16 @@ header {
 }
 
 .messageOfTheDay {
-	color:#00AAE6;
+	/* color:#00AAE6; */
+	color:#728D36;
 	padding:0 90px 70px 90px;
 	font-size:28px;
 	line-height:42px;
 }
 
 .Clock {
-	background:#00AAE6;
+	/* background:#00AAE6; */
+	background:#728D36;
 	float:right;
 	width:136px;
 	height:46px;
@@ -127,7 +129,7 @@ header {
 }
 
 .SystemPane {
-	width:50%;
+	width:100%;
 	float:left;
 }
 .SystemPane > div {
@@ -166,7 +168,8 @@ header {
 	height:8px;
 	-moz-border-radius:4px;
 	border-radius:4px;
-	background:#006788;
+	/* background:#006788; */
+	background:#29581F;
 	margin-left:10px;
 	margin-top:30px;
 }
@@ -179,11 +182,13 @@ header {
 	padding:9px 0 9px 14px;
 	font-size:32px;
 	line-height:32px;
-	background:#00AAE6;
+	/* background:#00AAE6; */
+	background:#728D36;
 	color:#FFF;
 }
 .LiveBoard h3 small {
-	color:#00688C;
+	/* color:#00688C; */
+	color:#29581F;
 	font-size:16px;
 	font-weight:normal;
 }

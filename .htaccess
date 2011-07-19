@@ -7,7 +7,7 @@ Options +FollowSymLinks
 Options -Indexes
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /
+RewriteBase /InfoScreen2/
 RewriteRule ^$ controllers/pagehandler.php?page=info [QSA,NC,L]
 RewriteRule ^(\d*\.?\d*)/(\d*\.?\d*)/$ controllers/pagehandler.php?page=info&x=$2&y=$1 [QSA,NC,L]
 </IfModule>

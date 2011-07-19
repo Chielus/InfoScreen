@@ -11,14 +11,18 @@ window.log = function(){
 	/**
 	 * Combines $.replaceWith and $.jqote while returning the new element
 	 */
-	$.fn.templateReplace = function templateReplace(templateName, data) {
+	$.fn.templateReplace = function templateReplace(templateName, data) {		
 		var prev = this.prev()[0];
-		var $parent = this.parent();
+		//console.log(this.parent());
+		var parent = this.parent();
+		//console.log(this);
 		this.replaceWith($('#'+templateName+'-template').jqote(data));
+		//console.log(this);
 		if (prev) {
 			return $(prev).next();
 		} else {
-			return $parent.children().first();
+			//console.log(parent.children().first());
+			return parent.children().first();
 		}
 	};
 

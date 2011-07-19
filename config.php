@@ -17,7 +17,7 @@ $mivbarray = array(array("name" =>"Steenbok", "distance" => 186),
 		   array("name" =>"Carina", "distance" => 425),
 		   array("name" =>"Paduwa", "distance" => 424));
 
-$nmbsarray = array(array("name" =>"Brussel Noord", "distance" => 3900),
+$nmbsarray = array(array("name" =>"Brussel Midi", "distance" => 3900),
 		   array("name" =>"Evere", "distance" => 3900),
 		   array("name" =>"Meiser", "distance" => 1300));
 
