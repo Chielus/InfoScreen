@@ -22,7 +22,8 @@ time, mark, audio, video {
 
 /* TEST */
 body {
-  margin: 40;
+  margin-left: 50px !important;
+  margin-right: 50px !important;
 }
 
 article, aside, details, figcaption, figure,
@@ -110,7 +111,7 @@ header {
 
 .messageOfTheDay {
 	/* color:#00AAE6; */
-	color:#728D36;
+	color:#fb8b1a;
 	padding:0 90px 70px 90px;
 	font-size:28px;
 	line-height:42px;
@@ -118,7 +119,7 @@ header {
 
 .Clock {
 	/* background:#00AAE6; */
-	background:#728D36;
+	background:#fb8b1a;
 	float:right;
 	width:136px;
 	height:46px;
@@ -188,7 +189,7 @@ header {
 	font-size:32px;
 	line-height:32px;
 	/* background:#00AAE6; */
-	background:#728D36;
+	background:#fb8b1a;
 	color:#FFF;
 }
 .LiveBoard h3 small {
