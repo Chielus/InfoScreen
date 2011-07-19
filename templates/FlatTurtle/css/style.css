@@ -3,7 +3,7 @@
 
 /*  HTML5 Boilerplate  */
 
-html, body, div, span, object, iframe,
+html, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
 small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
@@ -18,6 +18,11 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+}
+
+/* TEST */
+body {
+  margin: 40;
 }
 
 article, aside, details, figcaption, figure,
