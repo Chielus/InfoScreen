@@ -86,7 +86,7 @@
 	<script type="text/x-jqote-template" id="LiveBoard-template">
     <![CDATA[
 		<div class="LiveBoard">
-			<h3><%! this.name %> <small>(<%! this.distanceMeters %>m / <%! this.distanceWalking %>min walk)</small></h3>
+			<h3><%! this.name %><small>(<%! this.distanceMeters %>m / <%! this.distanceWalking %>min walk)</small></h3>
 			<table>
 				<tbody>
 				</tbody>

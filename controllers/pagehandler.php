@@ -31,6 +31,7 @@ private $detectTemplate = false;
     * @return array will return an associative array of page specific variables.
     */
      protected function loadContent(){
+
 	  //Step 2: Get the get vars, change them to the right format & boom
 	  $data = new DataLayer($this->getLang());	          
 
