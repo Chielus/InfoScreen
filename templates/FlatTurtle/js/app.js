@@ -139,7 +139,9 @@
 					liveBoards.push(new LiveBoard(liveBoardContainer.templateAppend("EmptyDiv"), system, station, config).stop().hide());
 			});
 			
-			liveBoards[currentLiveBoardIndex] && liveBoards[currentLiveBoardIndex].start().show();
+			if(liveBoards.length !== 0){
+			    liveBoards[currentLiveBoardIndex] && liveBoards[currentLiveBoardIndex].start().show();
+			}
 			
 			updateTicker();
 		};
@@ -152,15 +154,17 @@
 
 		var addBehaviours = function() {
 			interval = window.setInterval(function() {
-				var previousIndex = currentLiveBoardIndex;
-				var nextIndex = (currentLiveBoardIndex+1)%liveBoards.length;
-				liveBoards[previousIndex].stop();
-				liveBoards[nextIndex].start(function() {
-					currentLiveBoardIndex = nextIndex;
-					liveBoards[previousIndex].hide();
-					liveBoards[nextIndex].show();
-					updateTicker();
-				});
+			    if(liveBoards.length !== 0){
+			        var previousIndex = currentLiveBoardIndex;
+                    var nextIndex = (currentLiveBoardIndex+1)%liveBoards.length;
+                    liveBoards[previousIndex].stop();
+                    liveBoards[nextIndex].start(function() {
+                        currentLiveBoardIndex = nextIndex;
+                        liveBoards[previousIndex].hide();
+                        liveBoards[nextIndex].show();
+                        updateTicker();
+                    });
+			    }
 			}, config.cycleLiveboardsInterval*1000);
 		};
 
