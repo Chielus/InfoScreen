@@ -73,7 +73,7 @@ private $detectTemplate = false;
           $content["refreshinterval"] = $infoscreen->getSettingValue("refreshinterval") == null ? 60 : $infoscreen->getSettingValue("refreshinterval");
 	  $content["cycleinterval"] = $infoscreen->getSettingValue("cycleinterval") == null ? 10 : $infoscreen->getSettingValue("cycleinterval");
 	  $content["logo"] = $infoscreen->getSettingValue("logo") == null ? "templates/FlatTurtle/img/logo.png" : $infoscreen->getSettingValue("logo");
-
+      $content["color"] = $infoscreen->getSettingValue("color") == null ? "#ffffff" : $infoscreen->getSettingValue("color");
 	  return $content;
      }
 
