@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta http-equiv="refresh" content="300"><!--Refresh the page 5 minutes to update the source code-->
 	<title></title>
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -13,6 +12,21 @@
 	<link rel="shortcut icon" href="templates/FlatTurtle/favicon.ico">
 	<link rel="apple-touch-icon" href="templates/FlatTurtle/apple-touch-icon.png">
 	<link rel="stylesheet" href="templates/FlatTurtle/css/style.css?v=2">
+	<style type="text/css">
+	   /* Dynamic CSS */
+	    .messageOfTheDay {
+            color: <?php echo $content['color'];?>;
+        }
+        
+        .Clock {
+            /* background:#00AAE6; */
+            background: <?php echo $content['color'];?>;
+        }
+        
+        .LiveBoard h3 {
+            background: <?php echo $content['color'];?>;
+        }
+	</style>
 </head>
 <body>
 	<div id="container">
