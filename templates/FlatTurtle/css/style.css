@@ -112,7 +112,7 @@ header {
 .messageOfTheDay {
 	/* color:#00AAE6; */
 	color:#fb8b1a;
-	padding:0 0px 30px 0px;
+	padding:0 0px 10px 0px;
 	font-size:28px;
 	line-height:42px;
 }
@@ -139,7 +139,7 @@ header {
 	float:left;
 }
 .SystemPane > div {
-	margin-left:4px;
+	/* margin-left:4px; */
 }
 .SystemPane:nth-child(1) > div {
 	margin-left:0;
