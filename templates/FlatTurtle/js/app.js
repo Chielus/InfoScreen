@@ -22,7 +22,7 @@
 			irail.set_default_lang("en");
 			
 			this.clock = new Clock(rootElement.find(".Clock"));
-			//this.nmbsSystemPane = new SystemPane(rootElement.find(".SystemPane.nmbs"), "nmbs", config);
+			this.nmbsSystemPane = new SystemPane(rootElement.find(".SystemPane.nmbs"), "nmbs", config);
 			//this.mivbSystemPane = new SystemPane(rootElement.find(".SystemPane.mivb"), "mivb", config);
 		};
 
@@ -62,10 +62,10 @@
 		
 		var refresh = function() {
 			//rootElement = rootElement.templateReplace("Clock", that); leaks
-			$(rootElement).html(that.time);
+			$(rootElement).html(time);
 		};
 		
-		this.time = function() {
+		var time = function() {
 			var now = new Date(),
 			    hours = now.getHours(),
 			    minutes = now.getMinutes();
@@ -85,7 +85,7 @@
 
 		var initializeHtml = function() {
 		    //rootElement = rootElement.templateReplace("Clock", that); leaks
-			$(rootElement).html(that.time);
+			rootElement.html(that.time);
 		};
 
 		var addBehaviours = function() {
@@ -122,8 +122,21 @@
 		
 		this.name;
 		
-		var updateTicker = function() {
-			liveBoardsTicker = liveBoardsTicker.templateReplace("LiveBoardsTicker", {currentLiveBoardIndex:currentLiveBoardIndex, liveBoardsCount:liveBoards.length});
+		var updateTicker = function() {	
+			liveBoardsTicker.html(getTickerHTML);
+		};
+		
+		var getTickerHTML = function(){
+		    var ol = $("<ol>");
+		    for (var i=0; i<liveBoards.length;i++) {
+		        var li = $("<li>");
+		        if(currentLiveBoardIndex === i){
+		            li.addClass('current');
+		        }
+		        li.html('&nbsp;');
+		        ol.append(li);
+            }
+		    return ol;
 		};
 		
 		var initialize = function() {
@@ -225,10 +238,11 @@
 			irail.liveboards.lookup(system, station.name, "DEP", function(data) {
 				$.each(rows, function(i, entry) {
 					entry.destroy(true);
+					entry = null;
 				});
 				rows = [];
 				for(var i=0; i<data.entries.length&&i<config.rowsToShow; i++) {
-						rows.push(new LiveBoardRow(rowContainer.templateAppend("EmptyTr"), system, data.entries[i]));
+					rows.push(new LiveBoardRow(rowContainer, system, data.entries[i]));
 				}
 				refreshCallback && refreshCallback();
 				refreshCallback = null;
@@ -324,9 +338,40 @@
 			    minutes=time.getMinutes();
 			return (hours<10?'0':'')+hours + ':' + (minutes<10?'0':'')+minutes;
 		};
+		
+		var getHTML = function(){
+		    var tr = $("<tr>");
+		    tr.addClass('LiveBoardRow');
+		    if(that.cancelled){
+		        tr.addClass('cancelled');
+		    }
+		    var td = $("<td>");
+		    var span = $("<span>");
+		    span.append(that.time);
+		    if(that.delay){
+                td.addClass('delayed');
+                span.append($("<em").html(that.timeWithDelay));
+            }
+		    td.append(span);
+		    tr.append(td);
+		    switch(that.system){
+		        case 'nmbs':
+		          tr.append($("<td>").append($("<span>").addClass("lineCode type").append($("<span>").html(that.type))));
+		          tr.append($("<td>").html(that.destination));
+		          tr.append($("<td>").append($("<span>").addClass("lineCode platform").append($("<span>").html(that.cancelled ? "-" : that.platform ))));
+		          break;
+	            case 'mivb':
+	              tr.append($("<td>").append($("<span>").addClass("lineCode line").append($("<span>").html(that.type))));
+	              tr.append($("<td>").html(that.destination));
+	              break;
+	            //case 'delijn':
+		    }
+		    return tr;
+		}
 
 		var initializeHtml = function() {
-			rootElement = rootElement.templateReplace("LiveBoardRow", that);
+		    rootElement.append(getHTML);
+			//rootElement = rootElement.templateReplace("LiveBoardRow", that); //leaks
 		};
 
 		var addBehaviours = function() {
@@ -340,8 +385,7 @@
 
 			rootElement.empty();
 			if (remove) {
-				rootElement.remove();
-				delete this;
+				rootElement = null;
 			}
 		}
 
