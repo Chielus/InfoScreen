@@ -226,6 +226,7 @@
 				$.each(rows, function(i, entry) {
 					entry.destroy(true);
 				});
+				rows = [];
 				for(var i=0; i<data.entries.length&&i<config.rowsToShow; i++) {
 						rows.push(new LiveBoardRow(rowContainer.templateAppend("EmptyTr"), system, data.entries[i]));
 				}
