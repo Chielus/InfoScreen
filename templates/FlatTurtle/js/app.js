@@ -22,7 +22,7 @@
 			irail.set_default_lang("en");
 			
 			this.clock = new Clock(rootElement.find(".Clock"));
-			this.nmbsSystemPane = new SystemPane(rootElement.find(".SystemPane.nmbs"), "nmbs", config);
+			//this.nmbsSystemPane = new SystemPane(rootElement.find(".SystemPane.nmbs"), "nmbs", config);
 			//this.mivbSystemPane = new SystemPane(rootElement.find(".SystemPane.mivb"), "mivb", config);
 		};
 
@@ -59,10 +59,10 @@
 		var interval;
 		var that = this;
 		var ticker = true;
-
 		
 		var refresh = function() {
-			rootElement = rootElement.templateReplace("Clock", that);
+			//rootElement = rootElement.templateReplace("Clock", that); leaks
+			$(rootElement).html(that.time);
 		};
 		
 		this.time = function() {
@@ -76,7 +76,6 @@
 				ticker = true;
 				return (hours<10?'0':'')+hours+"<span style='visibility:hidden;'>:</span>"+(minutes<10?'0':'')+minutes;
 			}
-			
 		};
 		
 		var initialize = function() {
@@ -85,7 +84,8 @@
 		};
 
 		var initializeHtml = function() {
-			rootElement = rootElement.templateReplace("Clock", that);
+		    //rootElement = rootElement.templateReplace("Clock", that); leaks
+			$(rootElement).html(that.time);
 		};
 
 		var addBehaviours = function() {
