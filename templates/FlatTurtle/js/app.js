@@ -350,7 +350,7 @@
 		    span.append(that.time);
 		    if(that.delay){
                 td.addClass('delayed');
-                span.append($("<em").html(that.timeWithDelay));
+                span.append($("<em>").html(that.timeWithDelay));
             }
 		    td.append(span);
 		    tr.append(td);
